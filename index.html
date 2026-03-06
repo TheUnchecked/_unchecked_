@@ -5,219 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Black Sheep</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #f5f2eb;
-      --bg2: #ede9df;
-      --card: #faf8f3;
-      --border: #d8d2c4;
-      --text: #1a1714;
-      --muted: #6b6459;
-      --accent: #2d6a4f;
-      --accent2: #b5451b;
-      --tag-bg: #e8e3d8;
+      --bg: #0d0d0d;
+      --card: #141414;
+      --border: #242424;
+      --text: #e8e8e8;
+      --muted: #666;
+      --accent: #c8f0d8;
+      --accent2: #f0c8b4;
     }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Lora', Georgia, serif; min-height: 100vh; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Lora', Georgia, serif;
-      min-height: 100vh;
-    }
-
-    /* NAV */
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.4rem 3rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem; position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100; transition: border-color 0.3s, background 0.3s;
     }
-
-    .logo {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 1rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--text);
-      text-decoration: none;
-    }
-
+    nav.scrolled { background: rgba(13,13,13,0.95); border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); }
+    .logo { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text); text-decoration: none; }
     .logo span { color: var(--accent); }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* HERO */
     .hero {
-      padding: 4rem 3rem 3rem;
-      max-width: 900px;
-      margin: 0 auto;
+      height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 2rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,240,216,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 15vw, 13rem);
+      line-height: 0.95; letter-spacing: 0.05em;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 0 40px rgba(200,240,216,0.3));
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-sub { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--muted); margin-top: 2rem; animation: fadeUp 0.8s 0.2s ease both; }
+    .hero-desc { margin-top: 1rem; font-size: 0.95rem; color: #555; font-style: italic; animation: fadeUp 0.8s 0.35s ease both; }
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted);
+      letter-spacing: 0.15em; animation: bounce 2s 1s infinite; text-decoration: none;
     }
 
-    .hero-prefix {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.8rem;
-    }
+    .section { max-width: 860px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }
+    .section-header .slash { font-family: 'Space Mono', monospace; font-size: 1.2rem; color: var(--accent); }
+    .section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.1em; color: var(--text); }
 
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      line-height: 1.15;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.2rem; }
 
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--muted);
-      font-style: italic;
-      line-height: 1.7;
-    }
-
-    /* DIVIDER */
-    .divider {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 3rem;
-      border: none;
-      border-top: 1px solid var(--border);
-      margin-bottom: 2.5rem;
-    }
-
-    /* GRID */
-    .grid {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 3rem 5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* CARD */
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.8rem;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 3px;
+      padding: 1.8rem; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 0.8rem;
       transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-      cursor: pointer;
     }
+    .card:hover { border-color: rgba(200,240,216,0.3); box-shadow: 0 0 30px rgba(200,240,216,0.05); transform: translateY(-2px); }
+    .card-date { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+    .card h3 { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; line-height: 1.4; color: var(--text); }
+    .card p { font-size: 0.88rem; color: #555; line-height: 1.7; flex: 1; }
 
-    .card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-      transform: translateY(-2px);
-    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+    .tag { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 2px; border: 1px solid var(--border); color: var(--muted); }
+    .tag.green { color: var(--accent); border-color: rgba(200,240,216,0.25); }
+    .tag.warm  { color: var(--accent2); border-color: rgba(240,200,180,0.25); }
 
-    .card-date {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
+    footer { text-align: center; padding: 2rem; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #333; border-top: 1px solid var(--border); letter-spacing: 0.1em; }
 
-    .card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      line-height: 1.3;
-      color: var(--text);
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
 
-    .card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.3rem;
-    }
-
-    .tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-      background: var(--tag-bg);
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    .tag.green { color: var(--accent); border-color: #9dc4b0; background: #eaf3ee; }
-    .tag.red   { color: var(--accent2); border-color: #e4b09d; background: #faeee8; }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--border);
-      border-top: 1px solid var(--border);
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero       { animation: fadeUp 0.5s ease both; }
-    .card:nth-child(1) { animation: fadeUp 0.5s 0.1s ease both; }
-    .card:nth-child(2) { animation: fadeUp 0.5s 0.2s ease both; }
-    .card:nth-child(3) { animation: fadeUp 0.5s 0.3s ease both; }
-    .card:nth-child(4) { animation: fadeUp 0.5s 0.4s ease both; }
+    .card { animation: fadeUp 0.5s ease both; }
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
 
     @media (max-width: 640px) {
       nav { padding: 1rem 1.5rem; }
-      .hero, .grid { padding-left: 1.5rem; padding-right: 1.5rem; }
       .grid { grid-template-columns: 1fr; }
+      .section { padding: 3rem 1.5rem 4rem; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
+  <nav id="nav">
     <a href="index.html" class="logo">THE <span>BLACK</span> SHEEP</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -227,41 +110,46 @@
   </nav>
 
   <section class="hero">
-    <p class="hero-prefix">// kruskeggio</p>
-    <h1>The Black Sheep</h1>
-    <p>Pensieri, analisi e articoli scritti fuori dal gregge.</p>
+    <h1 class="hero-title">THE BLACK<br>SHEEP</h1>
+    <p class="hero-sub">// kruskeggio</p>
+    <p class="hero-desc">Scrivo quello che penso. Fuori dal gregge.</p>
+    <a class="scroll-hint" href="#articoli">↓ &nbsp; articoli</a>
   </section>
 
-  <hr class="divider">
+  <section class="section" id="articoli">
+    <div class="section-header">
+      <span class="slash">//</span>
+      <h2>Articoli</h2>
+    </div>
+    <div class="grid">
+      <a class="card" href="articoli/articolo-di-prova.md">
+        <span class="card-date">2026-03-06</span>
+        <h3>Articolo di prova</h3>
+        <p>Il mio primo articolo pubblicato su GitHub. Un esperimento di scrittura e pubblicazione senza piattaforme intermedie.</p>
+        <div class="tags">
+          <span class="tag green">inizio</span>
+          <span class="tag">github</span>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <span class="card-date">prossimamente</span>
+        <h3>Il prossimo articolo</h3>
+        <p>Il tuo secondo articolo apparirà qui. Aggiungi una card e crea il file Markdown corrispondente.</p>
+        <div class="tags">
+          <span class="tag warm">in arrivo</span>
+        </div>
+      </a>
+    </div>
+  </section>
 
-  <main class="grid" id="articoli">
+  <footer>the.black.sheep &mdash; pubblicato su github pages</footer>
 
-    <!-- ARTICOLO DI PROVA -->
-    <a class="card" href="articoli/articolo-di-prova.html">
-      <span class="card-date">2026-03-06</span>
-      <h2>Articolo di prova</h2>
-      <p>Questo è il mio primo articolo pubblicato su GitHub. Un esperimento di scrittura e pubblicazione senza piattaforme intermedie.</p>
-      <div class="tags">
-        <span class="tag green">inizio</span>
-        <span class="tag">github</span>
-      </div>
-    </a>
-
-    <!-- PLACEHOLDER -->
-    <a class="card" href="#">
-      <span class="card-date">prossimamente</span>
-      <h2>Il prossimo articolo</h2>
-      <p>Il tuo secondo articolo apparirà qui. Basta aggiungere una card in questo file e creare il documento Markdown.</p>
-      <div class="tags">
-        <span class="tag red">in arrivo</span>
-      </div>
-    </a>
-
-  </main>
-
-  <footer>
-    the.black.sheep &mdash; pubblicato su github pages
-  </footer>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
 
 </body>
 </html>
