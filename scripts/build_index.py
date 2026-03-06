@@ -1,0 +1,156 @@
+import os
+import re
+from datetime import datetime
+from bs4 import BeautifulSoup
+
+ARTICLES_DIR = "articoli"
+OUTPUT_FILE = "index.html"
+
+def extract_article_data(filepath):
+    with open(filepath, "r", encoding="utf-8") as f:
+        soup = BeautifulSoup(f.read(), "html.parser")
+
+    title = ""
+    t = soup.find(class_="article-title")
+    if t:
+        title = t.get_text(strip=True)
+
+    subtitle = ""
+    s = soup.find(class_="article-subtitle")
+    if s:
+        subtitle = s.get_text(strip=True)
+
+    date = ""
+    m = soup.find(class_="article-meta")
+    if m:
+        match = re.search(r"\d{4}-\d{2}-\d{2}", m.get_text())
+        if match:
+            date = match.group()
+
+    tags = []
+    for tag in soup.find_all(class_="tag"):
+        classes = tag.get("class", [])
+        color = next((c for c in classes if c != "tag"), "")
+        tags.append({"text": tag.get_text(strip=True), "color": color})
+
+    filename = os.path.basename(filepath)
+
+    return {"title": title, "subtitle": subtitle, "date": date, "tags": tags, "file": filename}
+
+def build_card(article):
+    tags_html = "".join(
+        f'<span class="tag {t["color"]}">{t["text"]}</span>'
+        for t in article["tags"]
+    )
+    return f"""
+    <a class="card" href="articoli/{article['file']}">
+      <span class="card-date">{article['date']}</span>
+      <h3>{article['title']}</h3>
+      <p>{article['subtitle']}</p>
+      <div class="tags">{tags_html}</div>
+    </a>"""
+
+def build_index(articles):
+    cards_html = "".join(build_card(a) for a in articles)
+    return f"""<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Black Sheep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    :root {{ --bg: #0d0d0d; --card: #141414; --border: #242424; --text: #e8e8e8; --muted: #666; --accent: #c8f0d8; --accent2: #f0c8b4; --accent3: #c8d8f0; --accent4: #f0e0c8; }}
+    html {{ scroll-behavior: smooth; }}
+    body {{ background: var(--bg); color: var(--text); font-family: 'Lora', Georgia, serif; min-height: 100vh; }}
+    nav {{ display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: border-color 0.3s, background 0.3s; }}
+    nav.scrolled {{ background: rgba(13,13,13,0.95); border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); }}
+    .logo {{ font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text); text-decoration: none; }}
+    .logo span {{ color: var(--accent); }}
+    .nav-links {{ display: flex; gap: 2.5rem; list-style: none; }}
+    .nav-links a {{ font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }}
+    .nav-links a:hover {{ color: var(--accent); }}
+    .hero {{ height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; overflow: hidden; }}
+    .hero::before {{ content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,240,216,0.06) 0%, transparent 70%); pointer-events: none; }}
+    .hero-title {{ font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 15vw, 13rem); line-height: 0.95; letter-spacing: 0.05em; background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 40px rgba(200,240,216,0.3)); animation: fadeUp 0.8s ease both; }}
+    .hero-sub {{ font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--muted); margin-top: 2rem; animation: fadeUp 0.8s 0.2s ease both; }}
+    .hero-desc {{ margin-top: 1rem; font-size: 0.95rem; color: #555; font-style: italic; animation: fadeUp 0.8s 0.35s ease both; }}
+    .scroll-hint {{ position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.15em; animation: bounce 2s 1s infinite; text-decoration: none; }}
+    .section {{ max-width: 860px; margin: 0 auto; padding: 5rem 2rem 6rem; }}
+    .section-header {{ display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }}
+    .section-header .slash {{ font-family: 'Space Mono', monospace; font-size: 1.2rem; color: var(--accent); }}
+    .section-header h2 {{ font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.1em; color: var(--text); }}
+    .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.2rem; }}
+    .card {{ background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 1.8rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.8rem; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }}
+    .card:hover {{ border-color: rgba(200,240,216,0.3); box-shadow: 0 0 30px rgba(200,240,216,0.05); transform: translateY(-2px); }}
+    .card-date {{ font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); }}
+    .card h3 {{ font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; line-height: 1.4; color: var(--text); }}
+    .card p {{ font-size: 0.88rem; color: #555; line-height: 1.7; flex: 1; }}
+    .tags {{ display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }}
+    .tag {{ font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 2px; border: 1px solid var(--border); color: var(--muted); }}
+    .tag.green {{ color: var(--accent); border-color: rgba(200,240,216,0.25); }}
+    .tag.warm {{ color: var(--accent2); border-color: rgba(240,200,180,0.25); }}
+    .tag.blue {{ color: var(--accent3); border-color: rgba(200,216,240,0.25); }}
+    .tag.yellow {{ color: var(--accent4); border-color: rgba(240,224,200,0.25); }}
+    footer {{ text-align: center; padding: 2rem; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #333; border-top: 1px solid var(--border); letter-spacing: 0.1em; }}
+    @keyframes fadeUp {{ from {{ opacity: 0; transform: translateY(20px); }} to {{ opacity: 1; transform: translateY(0); }} }}
+    @keyframes bounce {{ 0%, 100% {{ transform: translateX(-50%) translateY(0); }} 50% {{ transform: translateX(-50%) translateY(6px); }} }}
+    .card {{ animation: fadeUp 0.5s ease both; }}
+    .card:nth-child(1) {{ animation-delay: 0.1s; }}
+    .card:nth-child(2) {{ animation-delay: 0.2s; }}
+    .card:nth-child(3) {{ animation-delay: 0.3s; }}
+    .card:nth-child(4) {{ animation-delay: 0.4s; }}
+    @media (max-width: 640px) {{ nav {{ padding: 1rem 1.5rem; }} .grid {{ grid-template-columns: 1fr; }} .section {{ padding: 3rem 1.5rem 4rem; }} }}
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <a href="index.html" class="logo">THE <span>BLACK</span> SHEEP</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#articoli">Articoli</a></li>
+      <li><a href="https://github.com/TheBlackSheepBlog/the.black.sheep" target="_blank">GitHub</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <h1 class="hero-title">THE BLACK<br>SHEEP</h1>
+    <p class="hero-sub">// TheBlackSheepBlog</p>
+    <p class="hero-desc">Scrivo quello che penso. Fuori dal gregge.</p>
+    <a class="scroll-hint" href="#articoli">&#x2193; &nbsp; articoli</a>
+  </section>
+  <section class="section" id="articoli">
+    <div class="section-header">
+      <span class="slash">//</span>
+      <h2>Articoli</h2>
+    </div>
+    <div class="grid">
+      {cards_html}
+    </div>
+  </section>
+  <footer>the.black.sheep &mdash; pubblicato su github pages</footer>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {{
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }});
+  </script>
+</body>
+</html>"""
+
+if __name__ == "__main__":
+    articles = []
+    if os.path.exists(ARTICLES_DIR):
+        for fname in sorted(os.listdir(ARTICLES_DIR), reverse=True):
+            if fname.endswith(".html"):
+                path = os.path.join(ARTICLES_DIR, fname)
+                data = extract_article_data(path)
+                if data["title"]:
+                    articles.append(data)
+
+    html = build_index(articles)
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        f.write(html)
+
+    print(f"index.html generato con {len(articles)} articoli.")
