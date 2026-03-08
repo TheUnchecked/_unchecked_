@@ -19,14 +19,13 @@
     .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
     .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,240,216,0.06) 0%, transparent 70%); pointer-events: none; }
-    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 15vw, 13rem); line-height: 0.95; letter-spacing: 0.05em; background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 40px rgba(200,240,216,0.3)); animation: fadeUp 0.8s ease both; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,240,216,0.04) 0%, transparent 70%); pointer-events: none; }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 15vw, 13rem); line-height: 0.95; letter-spacing: 0.05em; color: #ffffff; animation: fadeUp 0.8s ease both; }
     .hero-sub { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--muted); margin-top: 2rem; animation: fadeUp 0.8s 0.2s ease both; }
     .hero-desc { margin-top: 1rem; font-size: 0.95rem; color: #555; font-style: italic; animation: fadeUp 0.8s 0.35s ease both; }
     .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.15em; animation: bounce 2s 1s infinite; text-decoration: none; }
     .section { max-width: 860px; margin: 0 auto; padding: 5rem 2rem 6rem; }
     .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }
-    .section-header .slash { font-family: 'Space Mono', monospace; font-size: 1.2rem; color: var(--accent); }
     .section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.1em; color: var(--text); }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.2rem; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 1.8rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.8rem; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
@@ -62,29 +61,27 @@
   </nav>
   <section class="hero">
     <h1 class="hero-title">THE BLACK<br>SHEEP</h1>
-    <p class="hero-sub">// TheBlackSheepBlog</p>
+    <p class="hero-sub">TheBlackSheepBlog</p>
     <p class="hero-desc">Scrivo quello che penso. Fuori dal gregge.</p>
     <a class="scroll-hint" href="#articoli">&#x2193; &nbsp; articoli</a>
   </section>
   <section class="section" id="articoli">
     <div class="section-header">
-      <span class="slash">//</span>
       <h2>Articoli</h2>
     </div>
     <div class="grid">
-      
-    <a class="card" href="articoli/la-matematica-degli-agent.html">
-      <span class="card-date">2026-03-06</span>
-      <h3>La matematica degliagentnon mente. Ma nemmeno basta.</h3>
-      <p>10.000 dipendenti, 25 milioni al mese, 5.000 agent a 2.000€. Il calcolo è corretto. La domanda che nessuno si fa è un'altra.</p>
-      <div class="tags"><span class="tag green">AI</span><span class="tag warm">Lavoro</span><span class="tag blue">Agent</span><span class="tag yellow">Strategia</span></div>
-    </a>
-    <a class="card" href="articoli/exchange-split-permissions.html">
-      <span class="card-date">2026-03-06</span>
-      <h3>Exchange on-prem: il rischio che dorme nella tuaconfigurazione di default</h3>
-      <p>Ti sei mai chiesto quanti permessi ha Exchange sulla tua Active Directory? La risposta, nella maggior parte delle installazioni, è: troppi.</p>
-      <div class="tags"><span class="tag green">Exchange</span><span class="tag warm">Shared Permissions Model</span><span class="tag blue">Active Directory Split Permissions</span><span class="tag yellow">RBAC</span><span class="tag green">Security</span></div>
-    </a>
+      <a class="card" href="articoli/la-matematica-degli-agent.html">
+        <span class="card-date">2026-03-06</span>
+        <h3>La matematica degli agent non mente. Ma nemmeno basta.</h3>
+        <p>10.000 dipendenti, 25 milioni al mese, 5.000 agent a 2.000€. Il calcolo è corretto. La domanda che nessuno si fa è un'altra.</p>
+        <div class="tags"><span class="tag green">AI</span><span class="tag warm">Lavoro</span><span class="tag blue">Agent</span><span class="tag yellow">Strategia</span></div>
+      </a>
+      <a class="card" href="articoli/exchange-split-permissions.html">
+        <span class="card-date">2026-03-06</span>
+        <h3>Exchange on-prem: il rischio che dorme nella tua configurazione di default</h3>
+        <p>Ti sei mai chiesto quanti permessi ha Exchange sulla tua Active Directory? La risposta, nella maggior parte delle installazioni, è: troppi.</p>
+        <div class="tags"><span class="tag green">Exchange</span><span class="tag warm">Shared Permissions Model</span><span class="tag blue">Active Directory Split Permissions</span><span class="tag yellow">RBAC</span><span class="tag green">Security</span></div>
+      </a>
     </div>
   </section>
   <footer>the.black.sheep &mdash; pubblicato su github pages</footer>
