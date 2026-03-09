@@ -5,41 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Black Sheep</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg: #0d0d0d; --card: #141414; --border: #242424; --text: #e8e8e8; --muted: #666; --accent: #c8f0d8; --accent2: #f0c8b4; --accent3: #c8d8f0; --accent4: #f0e0c8; }
+    :root { --bg: #0d0d0d; --card: #111; --border: #2a2a2a; --text: #e8e8e8; --muted: #555; --accent: #c8f0d8; }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Lora', Georgia, serif; min-height: 100vh; }
-    nav { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: border-color 0.3s, background 0.3s; }
-    nav.scrolled { background: rgba(13,13,13,0.95); border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); }
-    .logo { font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text); text-decoration: none; }
+
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background 0.3s, border-color 0.3s; }
+    nav.scrolled { background: rgba(13,13,13,0.96); border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); }
+    .logo { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); text-decoration: none; }
     .logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
     .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(200,240,216,0.04) 0%, transparent 70%); pointer-events: none; }
-    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 15vw, 13rem); line-height: 0.95; letter-spacing: 0.05em; color: #ffffff; animation: fadeUp 0.8s ease both; }
-    .hero-sub { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--muted); margin-top: 2rem; animation: fadeUp 0.8s 0.2s ease both; }
-    .hero-desc { margin-top: 1rem; font-size: 0.95rem; color: #555; font-style: italic; animation: fadeUp 0.8s 0.35s ease both; }
-    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.15em; animation: bounce 2s 1s infinite; text-decoration: none; }
-    .section { max-width: 860px; margin: 0 auto; padding: 5rem 2rem 6rem; }
-    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }
-    .section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.1em; color: var(--text); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.2rem; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 1.8rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.8rem; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
-    .card:hover { border-color: rgba(200,240,216,0.3); box-shadow: 0 0 30px rgba(200,240,216,0.05); transform: translateY(-2px); }
-    .card-date { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); }
-    .card h3 { font-family: 'Space Mono', monospace; font-size: 1rem; font-weight: 700; line-height: 1.4; color: var(--text); }
-    .card p { font-size: 0.88rem; color: #555; line-height: 1.7; flex: 1; }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
-    .tag { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 2px; border: 1px solid var(--border); color: var(--muted); }
-    .tag.green { color: var(--accent); border-color: rgba(200,240,216,0.25); }
-    .tag.warm { color: var(--accent2); border-color: rgba(240,200,180,0.25); }
-    .tag.blue { color: var(--accent3); border-color: rgba(200,216,240,0.25); }
-    .tag.yellow { color: var(--accent4); border-color: rgba(240,224,200,0.25); }
-    footer { text-align: center; padding: 2rem; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #333; border-top: 1px solid var(--border); letter-spacing: 0.1em; }
+    .hero-title { font-family: 'Outfit', sans-serif; font-size: clamp(4.5rem, 14vw, 12rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; color: #ffffff; animation: fadeUp 0.8s ease both; }
+    .hero-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--muted); margin-top: 2rem; animation: fadeUp 0.8s 0.2s ease both; }
+    .hero-desc { margin-top: 1rem; font-size: 0.95rem; color: #444; font-style: italic; animation: fadeUp 0.8s 0.35s ease both; }
+    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.15em; animation: bounce 2s 1s infinite; text-decoration: none; }
+
+    .section { max-width: 880px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .section-header { margin-bottom: 3rem; }
+    .section-header h2 { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; letter-spacing: -0.01em; text-transform: uppercase; color: var(--text); }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.2rem; }
+
+    .card { background: var(--card); border: 1px dashed var(--border); border-radius: 4px; padding: 1.8rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.8rem; transition: border-color 0.2s, transform 0.2s; }
+    .card:hover { border-color: #444; transform: translateY(-2px); }
+    .card-date { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--muted); }
+    .card h3 { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; line-height: 1.45; color: var(--text); }
+    .card p { font-family: 'Lora', serif; font-size: 0.88rem; color: #555; line-height: 1.7; flex: 1; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 2px; border: 1px solid #333; color: #888; background: transparent; }
+    .card:hover .tag { border-color: #444; color: #aaa; }
+
+    footer { text-align: center; padding: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: #2a2a2a; border-top: 1px dashed var(--border); letter-spacing: 0.1em; }
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
     .card { animation: fadeUp 0.5s ease both; }
@@ -59,12 +63,14 @@
       <li><a href="https://github.com/TheBlackSheepBlog/the.black.sheep" target="_blank">GitHub</a></li>
     </ul>
   </nav>
+
   <section class="hero">
     <h1 class="hero-title">THE BLACK<br>SHEEP</h1>
     <p class="hero-sub">TheBlackSheepBlog</p>
     <p class="hero-desc">Scrivo quello che penso. Fuori dal gregge.</p>
     <a class="scroll-hint" href="#articoli">&#x2193; &nbsp; articoli</a>
   </section>
+
   <section class="section" id="articoli">
     <div class="section-header">
       <h2>Articoli</h2>
@@ -74,17 +80,30 @@
         <span class="card-date">2026-03-06</span>
         <h3>La matematica degli agent non mente. Ma nemmeno basta.</h3>
         <p>10.000 dipendenti, 25 milioni al mese, 5.000 agent a 2.000€. Il calcolo è corretto. La domanda che nessuno si fa è un'altra.</p>
-        <div class="tags"><span class="tag green">AI</span><span class="tag warm">Lavoro</span><span class="tag blue">Agent</span><span class="tag yellow">Strategia</span></div>
+        <div class="tags">
+          <span class="tag">AI</span>
+          <span class="tag">Lavoro</span>
+          <span class="tag">Agent</span>
+          <span class="tag">Strategia</span>
+        </div>
       </a>
       <a class="card" href="articoli/exchange-split-permissions.html">
         <span class="card-date">2026-03-06</span>
         <h3>Exchange on-prem: il rischio che dorme nella tua configurazione di default</h3>
         <p>Ti sei mai chiesto quanti permessi ha Exchange sulla tua Active Directory? La risposta, nella maggior parte delle installazioni, è: troppi.</p>
-        <div class="tags"><span class="tag green">Exchange</span><span class="tag warm">Shared Permissions Model</span><span class="tag blue">Active Directory Split Permissions</span><span class="tag yellow">RBAC</span><span class="tag green">Security</span></div>
+        <div class="tags">
+          <span class="tag">Exchange</span>
+          <span class="tag">Shared Permissions Model</span>
+          <span class="tag">Active Directory</span>
+          <span class="tag">RBAC</span>
+          <span class="tag">Security</span>
+        </div>
       </a>
     </div>
   </section>
+
   <footer>the.black.sheep &mdash; pubblicato su github pages</footer>
+
   <script>
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
