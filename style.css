@@ -567,24 +567,30 @@ nav {
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 0;
-  border: 1px solid var(--ink-xlight);
+  gap: 1rem;
   margin: 2rem 0;
 }
 
 .stat-card {
   padding: 1.5rem 1.2rem;
   text-align: center;
-  border-right: 1px solid var(--ink-xlight);
+  border: 1px solid var(--ink-xlight);
+  border-top: 3px solid var(--ink);
 }
 
-.stat-card:last-child { border-right: none; }
+.stat-card:nth-child(odd)  { border-top-color: #c0392b; }
+.stat-card:nth-child(even) { border-top-color: var(--ink); }
+.stat-card:nth-child(odd)  .stat-number { color: #c0392b; }
+.stat-card:nth-child(even) .stat-number { color: var(--ink); }
+
+[data-theme="dark"] .stat-card:nth-child(odd)  .stat-number { color: #e05c4a; }
+[data-theme="dark"] .stat-card:nth-child(even) .stat-number { color: var(--ink); }
+[data-theme="dark"] .stat-card:nth-child(odd)  { border-top-color: #e05c4a; }
 
 .stat-number {
   font-family: var(--font-disp);
   font-size: 2.5rem;
   line-height: 1;
-  color: var(--ink);
 }
 
 .stat-label {
