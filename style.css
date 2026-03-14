@@ -804,6 +804,23 @@ footer a { color: var(--ink-light); }
 footer a:hover { color: var(--ink); }
 
 /* ============================================
+   PAGE TRANSITION FADE
+   ============================================ */
+body {
+  animation: pageFadeIn 0.3s ease;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-out {
+  opacity: 0 !important;
+  transition: opacity 0.25s ease !important;
+}
+
+/* ============================================
    BACK TO TOP
    ============================================ */
 .back-to-top {
