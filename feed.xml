@@ -5,8 +5,15 @@
     <link>https://theblacksheepblog.github.io/the.black.sheep/</link>
     <description>Scrivo quello che penso. Fuori dal gregge.</description>
     <language>it</language>
-    <lastBuildDate>Sat, 14 Mar 2026 12:41:07 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2026 07:58:46 +0000</lastBuildDate>
     <atom:link href="https://theblacksheepblog.github.io/the.black.sheep/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>RC4 e Kerberos: hai tempo fino a luglio 2026 . Non sprecarlo.</title>
+      <link>https://theblacksheepblog.github.io/the.black.sheep/articoli/RC4.html</link>
+      <guid>https://theblacksheepblog.github.io/the.black.sheep/articoli/RC4.html</guid>
+      <pubDate>Sun, 15 Mar 2026 00:00:00 +0000</pubDate>
+      <description>Ti sei mai trovato a gestire un'interruzione di servizio su Active Directory senza capire immediatamente da dove venisse?</description>
+    </item>
     <item>
       <title>AdminSDHolder: perché i tuoi permessi spariscono ogni 60 minuti .</title>
       <link>https://theblacksheepblog.github.io/the.black.sheep/articoli/adminsdholder.html</link>
