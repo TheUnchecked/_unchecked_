@@ -5,15 +5,8 @@
     <link>https://theunchecked.github.io/_unchecked_/</link>
     <description>Non dare niente per scontato. Mai.</description>
     <language>it</language>
-    <lastBuildDate>Sun, 15 Mar 2026 12:51:21 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2026 12:51:30 +0000</lastBuildDate>
     <atom:link href="https://theunchecked.github.io/_unchecked_/feed.xml" rel="self" type="application/rss+xml"/>
-    <item>
-      <title>La falla silenziosa: i rischi dell'account Domain Join in Active Directory .</title>
-      <link>https://theunchecked.github.io/_unchecked_/articoli/domain-join-risks.html</link>
-      <guid>https://theunchecked.github.io/_unchecked_/articoli/domain-join-risks.html</guid>
-      <pubDate>Fri, 13 Mar 2026 00:00:00 +0000</pubDate>
-      <description>Un tecnico dell'Help Desk scarta un nuovo laptop aziendale. Avvia l'installazione di Windows 11. Preme F12 per il boot PXE.</description>
-    </item>
     <item>
       <title>Zero Trust non è un prodotto. È una mentalità .</title>
       <link>https://theunchecked.github.io/_unchecked_/articoli/zero-trust.html</link>
