@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}document.documentElement.dataset.theme=t||'dark'})()</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RC4 e Kerberos: hai tempo fino a luglio 2026. Non sprecarlo. — The Unchecked</title>
+  <meta name="description" content="Da luglio 2026 Microsoft disabiliterà RC4 in Kerberos per impostazione predefinita. La maggior parte delle infrastrutture aziendali arriverà a quella data impreparata.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Unchecked">
+  <meta property="og:title" content="RC4 e Kerberos: hai tempo fino a luglio 2026. Non sprecarlo.">
+  <meta property="og:description" content="Da luglio 2026 Microsoft disabiliterà RC4 in Kerberos per impostazione predefinita. La maggior parte delle infrastrutture aziendali arriverà a quella data impreparata.">
+  <meta property="og:url" content="https://theunchecked.github.io/_unchecked_/articoli/rc4-kerberos-2026.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav>
+    <a href="../index.html" class="logo"><span style="color:#c0392b">[</span> Unchecked <span style="color:#c0392b">]</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#articoli">Articoli</a></li>
+        <li><a href="https://github.com/theunchecked/_unchecked_" target="_blank">GitHub</a></li>
+      </ul>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <button id="theme-toggle" aria-label="Toggle theme">
+        <svg id="theme-icon-dark" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="theme-icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <p class="article-meta">2026-03-15 | The Unchecked<span class="read-time" id="read-time"></span></p>
+    <span class="article-number">07</span>
+    <h1 class="article-page-title">RC4 e Kerberos: hai tempo fino a <mark>luglio 2026</mark>.<br>Non sprecarlo.</h1>
+    <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:1.05rem; color:var(--ink-light); margin-top:1.2rem; line-height:1.7;">
+      Da luglio 2026 Microsoft disabiliterà RC4 in Kerberos per impostazione predefinita. Non è una novità dell'ultimo minuto. Eppure la maggior parte delle infrastrutture aziendali arriverà a quella data impreparata.
+    </p>
+    <div class="tags" style="margin-top:1.5rem;">
+      <span class="tag">Kerberos</span>
+      <span class="tag">Active Directory</span>
+      <span class="tag">Security</span>
+      <span class="tag">RC4</span>
+    </div>
+  </header>
+
+  <article class="article-content">
+
+    <p>Ti sei mai trovato a gestire un'interruzione di servizio su Active Directory senza capire immediatamente da dove venisse?</p>
+
+    <p>Probabilmente sì. E probabilmente era un problema che esisteva da mesi, silenzioso, in attesa del momento peggiore per manifestarsi.</p>
+
+    <p>Questo articolo è per chi vuole evitarlo.</p>
+
+    <div class="stats-row fade-in">
+      <div class="stat-card">
+        <div class="stat-number">1987</div>
+        <div class="stat-label">anno di nascita di RC4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1000x</div>
+        <div class="stat-label">più veloce da craccare vs AES</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">3</div>
+        <div class="stat-label">fasi di dismissione Microsoft</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">24</div>
+        <div class="stat-label">valore msDS per forzare AES</div>
+      </div>
+    </div>
+
+    <h2>Cos'è RC4 e perché è ancora lì</h2>
+
+    <p>RC4 è un algoritmo crittografico del 1987. Era veloce, leggero, perfetto per le CPU dell'epoca. Windows lo ha usato per decenni come standard in Kerberos e molti ambienti Active Directory lo hanno ancora attivo oggi, non per scelta consapevole, ma per inerzia.</p>
+
+    <p>Il problema è che RC4 ha debolezze strutturali note. Un ticket Kerberos cifrato con RC4 è circa mille volte più veloce da craccare rispetto a uno cifrato con AES. Non è un dettaglio — è la base del Kerberoasting, una delle tecniche di attacco più usate contro Active Directory.</p>
+
+    <div class="warning-box fade-in">
+      <p>Lasciare RC4 abilitato sui tuoi account di servizio nel 2026 non è un rischio accettabile. È una scelta.</p>
+    </div>
+
+    <h2>La roadmap che non puoi ignorare</h2>
+
+    <p>Microsoft ha strutturato la dismissione in tre fasi.</p>
+
+    <div class="pipeline-steps fade-in">
+      <div class="pipeline-step">
+        <div class="step-num">Gen</div>
+        <div class="step-name">2026</div>
+        <div class="step-detail">I Domain Controller iniziano a favorire AES e generano nuovi eventi di audit, con ID da 201 a 209. Sono i tuoi strumenti di osservazione — usali.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">Apr</div>
+        <div class="step-name">2026</div>
+        <div class="step-detail">Il KDC inizia a bloccare RC4 sulle impostazioni predefinite. Da questo momento i problemi diventano visibili agli utenti finali.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">Lug</div>
+        <div class="step-name">2026</div>
+        <div class="step-detail">RC4 viene disabilitato per impostazione predefinita. Nessun fallback automatico.</div>
+      </div>
+    </div>
+
+    <div class="insight-box fade-in">
+      <p>Se il tuo helpdesk inizia a ricevere segnalazioni di autenticazioni fallite ad aprile, significa che non hai usato la finestra di gennaio per monitorare.</p>
+    </div>
+
+    <h2>Come capire se sei a rischio</h2>
+
+    <p>L'attributo da controllare si chiama <code>msDS-SupportedEncryptionTypes</code>. Se è vuoto o non impostato su un account, quell'account potrebbe ricorrere a RC4 per impostazione predefinita.</p>
+
+    <p>Con PowerShell puoi estrarre tutti gli account che supportano esplicitamente RC4 o che non hanno tipi di crittografia definiti. Non aspettare che sia Microsoft a bloccare il protocollo per scoprire quanti account hai in quella situazione.</p>
+
+    <div class="code-block" data-lang="powershell">
+      <div class="code-wrap"><table>
+        <tr><td class="ln">1</td><td class="code"><span class="cc"># Account con RC4 esplicito (valore 4 o che include bit RC4)</span></td></tr>
+        <tr><td class="ln">2</td><td class="code"><span class="ck">Get-ADUser</span> <span class="cv">-Filter</span> { <span class="cs">msDS-SupportedEncryptionTypes</span> <span class="cv">-band</span> <span class="cn">4</span> } `</td></tr>
+        <tr><td class="ln">3</td><td class="code">  <span class="cv">-Properties</span> msDS-SupportedEncryptionTypes, PasswordLastSet |</td></tr>
+        <tr><td class="ln">4</td><td class="code">  <span class="ck">Select-Object</span> Name, msDS-SupportedEncryptionTypes, PasswordLastSet</td></tr>
+        <tr><td class="ln">5</td><td class="code"></td></tr>
+        <tr><td class="ln">6</td><td class="code"><span class="cc"># Account senza tipi di crittografia definiti (vulnerabili al fallback RC4)</span></td></tr>
+        <tr><td class="ln">7</td><td class="code"><span class="ck">Get-ADUser</span> <span class="cv">-Filter</span> { <span class="cs">msDS-SupportedEncryptionTypes</span> <span class="cv">-notlike</span> <span class="cs">"*"</span> } `</td></tr>
+        <tr><td class="ln">8</td><td class="code">  <span class="cv">-Properties</span> msDS-SupportedEncryptionTypes |</td></tr>
+        <tr><td class="ln">9</td><td class="code">  <span class="ck">Select-Object</span> Name, msDS-SupportedEncryptionTypes</td></tr>
+      </table></div>
+    </div>
+
+    <h2>Come sistemarlo</h2>
+
+    <p>Per forzare AES 128 e 256, imposta <code>msDS-SupportedEncryptionTypes</code> al valore 24. Per un account di servizio gestito il comando è:</p>
+
+    <div class="code-block" data-lang="powershell">
+      <div class="code-wrap"><table>
+        <tr><td class="ln">1</td><td class="code"><span class="cc"># Per account di servizio gestito (gMSA)</span></td></tr>
+        <tr><td class="ln">2</td><td class="code"><span class="ck">Set-ADServiceAccount</span> <span class="cv">-Identity</span> NomeAccount `</td></tr>
+        <tr><td class="ln">3</td><td class="code">  <span class="cv">-Replace</span> @{<span class="cs">"msDS-SupportedEncryptionTypes"</span>=<span class="cn">24</span>}</td></tr>
+        <tr><td class="ln">4</td><td class="code"></td></tr>
+        <tr><td class="ln">5</td><td class="code"><span class="cc"># Per account utente o computer normali</span></td></tr>
+        <tr><td class="ln">6</td><td class="code"><span class="ck">Set-ADUser</span> <span class="cv">-Identity</span> NomeAccount `</td></tr>
+        <tr><td class="ln">7</td><td class="code">  <span class="cv">-Replace</span> @{<span class="cs">"msDS-SupportedEncryptionTypes"</span>=<span class="cn">24</span>}</td></tr>
+      </table></div>
+    </div>
+
+    <div class="warning-box fade-in">
+      <p><strong>Attenzione:</strong> le chiavi AES vengono generate solo quando la password viene cambiata. Se un account di servizio non ruota la password da anni, le chiavi AES potrebbero non esistere. Impostare il valore 24 non basta — devi anche verificare che la password sia stata aggiornata di recente.</p>
+    </div>
+
+    <div class="two-cols fade-in">
+      <div class="col-side col-left">
+        <div class="col-side-title">Da verificare</div>
+        <p>Account con msDS vuoto o con bit RC4.</p>
+        <p>Service account con password vecchie.</p>
+        <p>Dispositivi NAS legacy.</p>
+        <p>Distribuzioni Linux datate.</p>
+        <p>Applicazioni che usano NTLM o RC4 esplicitamente.</p>
+      </div>
+      <div class="col-side col-right">
+        <div class="col-side-title">Da fare prima di luglio</div>
+        <p>Imposta msDS-SupportedEncryptionTypes = 24.</p>
+        <p>Ruota le password degli account coinvolti.</p>
+        <p>Monitora gli event ID 201-209 da gennaio.</p>
+        <p>Aggiorna o sostituisci i sistemi incompatibili.</p>
+        <p>Testa in ambiente di staging prima della produzione.</p>
+      </div>
+    </div>
+
+    <h2>Il punto</h2>
+
+    <p>La parte tecnica non è complicata. Quello che manca quasi sempre è la lucidità di affrontare il problema prima che diventi un'emergenza.</p>
+
+    <p>Hai una roadmap chiara, strumenti di monitoraggio già disponibili da gennaio 2026 e mesi per sistemare gli account critici prima che Microsoft tolga il fallback.</p>
+
+    <div class="conclusion-box fade-in">
+      <div class="quote">La parte più difficile non è tecnica.<br>È guardare nella direzione giusta<br>prima che nessuno stia ancora guardando lì.</div>
+    </div>
+
+    <div style="margin-top:3rem; display:flex; justify-content:space-between; align-items:center;">
+      <a id="back-link" href="../index.html" style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--ink-light); text-decoration:none;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-light)'">← Torna agli articoli</a>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--ink-xlight);">the.unchecked</span>
+    </div>
+
+  </article>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Torna su">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <footer>
+    <span>the.unchecked</span>
+    <span>pubblicato su <a href="https://github.com/theunchecked/_unchecked_">github</a></span>
+  </footer>
+
+  <script>
+    // Burger menu
+    const burger = document.getElementById("burger");
+    const navLinks = document.querySelector(".nav-links");
+    if (burger) {
+      burger.addEventListener("click", () => {
+        burger.classList.toggle("open");
+        navLinks.classList.toggle("mobile-open");
+        document.body.style.overflow = navLinks.classList.contains("mobile-open") ? "hidden" : "";
+      });
+      navLinks.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          burger.classList.remove("open");
+          navLinks.classList.remove("mobile-open");
+          document.body.style.overflow = "";
+        });
+      });
+    }
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    const progressBar = document.getElementById('progress-bar');
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+      backToTop.classList.toggle('visible', scrollTop > 400);
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const content = document.querySelector('.article-content');
+    if (content) {
+      const words = content.innerText.split(/\s+/).length;
+      const mins = Math.max(1, Math.round(words / 200));
+      const rt = document.getElementById('read-time');
+      if (rt) rt.textContent = mins + ' min';
+    }
+
+    const backLink = document.getElementById('back-link');
+    if (backLink) {
+      backLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = backLink.href; }, 260);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

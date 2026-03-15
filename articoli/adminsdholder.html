@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}document.documentElement.dataset.theme=t||'dark'})()</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdminSDHolder — The Unchecked</title>
+  <meta name="description" content="Riabiliti l'ereditarietà su un oggetto AD e un'ora dopo è di nuovo disabilitata. Non è un bug. È SDPROP.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Unchecked">
+  <meta property="og:title" content="AdminSDHolder: perché i tuoi permessi spariscono ogni 60 minuti.">
+  <meta property="og:description" content="Riabiliti l'ereditarietà su un oggetto AD e un'ora dopo è di nuovo disabilitata. Non è un bug. È SDPROP.">
+  <meta property="og:url" content="https://theunchecked.github.io/_unchecked_/articoli/adminsdholder.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav>
+    <a href="../index.html" class="logo"><span style="color:#c0392b">[</span> Unchecked <span style="color:#c0392b">]</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#articoli">Articoli</a></li>
+        <li><a href="https://github.com/TheUnchecked/theunchecked" target="_blank">GitHub</a></li>
+      </ul>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <button id="theme-toggle" aria-label="Toggle theme">
+        <svg id="theme-icon-dark" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="theme-icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <p class="article-meta">2026-03-13 | The Unchecked<span class="read-time" id="read-time"></span></p>
+    <span class="article-number">05</span>
+    <h1 class="article-page-title">AdminSDHolder: perché i tuoi permessi<br>spariscono ogni <mark>60 minuti</mark>.</h1>
+    <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:1.05rem; color:var(--ink-light); margin-top:1.2rem; line-height:1.7;">
+      Riabiliti l'ereditarietà su un oggetto AD e un'ora dopo è di nuovo disabilitata. Non è un bug. È SDPROP — e devi sapere come funziona per smettere di combatterlo alla cieca.
+    </p>
+    <div class="tags" style="margin-top:1.5rem;">
+      <span class="tag">Active Directory</span>
+      <span class="tag">Security</span>
+      <span class="tag">RBAC</span>
+      <span class="tag">IT Career</span>
+    </div>
+  </header>
+
+  <article class="article-content">
+
+    <p>Hai appena passato mezz'ora a sistemare i permessi su un account in Active Directory. Riabiliti l'ereditarietà, salvi, tutto ok. Un'ora dopo il tuo collega ti chiama: i permessi sono spariti di nuovo.</p>
+
+    <p>Non sei impazzito. Non hai fatto niente di sbagliato. È <strong>AdminSDHolder</strong> — un meccanismo di protezione automatica di AD che sovrascrive silenziosamente quello che hai fatto.</p>
+
+    <blockquote>Se non sai che esiste, combatterai per sempre contro qualcosa che non puoi vedere.</blockquote>
+
+    <h2>Step 1: Identificare se l'oggetto è un "Protected Object"</h2>
+
+    <div class="insight-box fade-in">
+      <p><strong>Azione:</strong> Verifica se l'utente o il gruppo appartiene a gruppi amministrativi critici: <strong>Domain Admins</strong>, <strong>Enterprise Admins</strong>, <strong>Schema Admins</strong>, <strong>Account Operators</strong>, ecc.</p>
+    </div>
+
+    <p>Il processo <strong>SDPROP</strong> (Security Descriptor Propagation) controlla ogni 60 minuti tutti i membri di questi gruppi privilegiati per garantire che i loro permessi siano sicuri e uniformi. Se l'oggetto è in questa lista, l'ereditarietà verrà disabilitata forzatamente ogni ora — anche se la riabiliti manualmente.</p>
+
+    <div class="stats-row fade-in">
+      <div class="stat-card">
+        <div class="stat-number">60</div>
+        <div class="stat-label">minuti tra ogni run SDPROP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1</div>
+        <div class="stat-label">valore adminCount se protetto</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">0</div>
+        <div class="stat-label">valore adminCount dopo pulizia</div>
+      </div>
+    </div>
+
+    <h2>Step 2: Rimuovere l'oggetto dai gruppi privilegiati</h2>
+
+    <div class="insight-box fade-in">
+      <p><strong>Azione:</strong> Apri <strong>Active Directory Users and Computers</strong>, individua l'oggetto, vai nel tab <strong>Member Of</strong> e rimuovi l'appartenenza ai gruppi protetti se l'account non deve più avere privilegi elevati.</p>
+    </div>
+
+    <p>Se l'oggetto rimane membro di un gruppo protetto, il sistema continuerà a sovrascrivere i permessi ogni ora. Rimuovendolo, si interrompe il meccanismo di protezione automatica per quell'oggetto specifico.</p>
+
+    <div class="warning-box fade-in">
+      <p><strong>Attenzione:</strong> Rimuovere un account da Domain Admins o altri gruppi privilegiati ha impatti immediati sui suoi accessi. Verifica sempre con il team prima di procedere in produzione.</p>
+    </div>
+
+    <h2>Step 3: Ripulire l'attributo adminCount</h2>
+
+    <div class="pipeline-steps fade-in">
+      <div class="pipeline-step">
+        <div class="step-num">01</div>
+        <div class="step-name">Abilita Advanced Features</div>
+        <div class="step-detail">In Active Directory Users and Computers: View → Advanced Features.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">02</div>
+        <div class="step-name">Apri Attribute Editor</div>
+        <div class="step-detail">Properties dell'oggetto → tab Attribute Editor → cerca l'attributo adminCount.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">03</div>
+        <div class="step-name">Resetta il valore</div>
+        <div class="step-detail">Imposta adminCount a 0 oppure clicca Clear. Fondamentale per una corretta pulizia dell'oggetto.</div>
+      </div>
+    </div>
+
+    <p>Quando un oggetto viene protetto, AD imposta <code>adminCount = 1</code>. Anche dopo aver rimosso l'utente dai gruppi amministrativi, il valore rimane a 1. Resettarlo è necessario — ma da solo non riabilita l'ereditarietà.</p>
+
+    <h2>Step 4: Riabilitare manualmente l'ereditarietà dei permessi</h2>
+
+    <div class="insight-box fade-in">
+      <p><strong>Azione:</strong> Properties dell'oggetto → tab <strong>Security</strong> → <strong>Advanced</strong> → clicca <strong>Enable Inheritance</strong>.</p>
+    </div>
+
+    <p>AdminSDHolder non è in grado di "ripulire" dopo se stesso: una volta che l'ereditarietà è stata disabilitata, rimane tale anche se l'oggetto non è più protetto. Serve un intervento manuale.</p>
+
+    <div class="two-cols fade-in">
+      <div class="col-side col-left">
+        <div class="col-side-title">Senza intervento manuale</div>
+        <p>adminCount resettato a 0.</p>
+        <p>Oggetto rimosso dai gruppi protetti.</p>
+        <p>Ereditarietà ancora disabilitata.</p>
+        <p>I permessi della OU non si propagano.</p>
+      </div>
+      <div class="col-side col-right">
+        <div class="col-side-title">Dopo Enable Inheritance</div>
+        <p>adminCount = 0.</p>
+        <p>Oggetto fuori dai gruppi protetti.</p>
+        <p>Ereditarietà riabilitata manualmente.</p>
+        <p>I permessi della OU si propagano correttamente.</p>
+      </div>
+    </div>
+
+    <h2>Step 5 (Opzionale): Forzare SDPROP immediatamente</h2>
+
+    <p>Se hai modificato il blueprint dei permessi nel container AdminSDHolder e vuoi che le modifiche siano applicate subito a tutti gli oggetti protetti, senza aspettare 60 minuti:</p>
+
+    <div class="code-block" data-lang="ldp.exe">
+      <div class="code-wrap"><table>
+        <tr><td class="ln">1</td><td class="code"><span class="cc"># Apri LDP.EXE</span></td></tr>
+        <tr><td class="ln">2</td><td class="code"><span class="cc"># Connection → Connect (PDC Emulator) → Bind</span></td></tr>
+        <tr><td class="ln">3</td><td class="code"><span class="cc"># Browse → Modify → DN: (lascia vuoto)</span></td></tr>
+        <tr><td class="ln">4</td><td class="code"></td></tr>
+        <tr><td class="ln">5</td><td class="code"><span class="cc"># Windows 2008 R2+</span></td></tr>
+        <tr><td class="ln">6</td><td class="code"><span class="ck">Attribute:</span> <span class="cv">runProtectAdminGroupsTask</span></td></tr>
+        <tr><td class="ln">7</td><td class="code"><span class="ck">Values:</span>   <span class="cn">1</span></td></tr>
+        <tr><td class="ln">8</td><td class="code"></td></tr>
+        <tr><td class="ln">9</td><td class="code"><span class="cc"># Clicca Enter → Run</span></td></tr>
+        <tr><td class="ln">10</td><td class="code"><span class="cc"># SDPROP viene eseguito immediatamente</span></td></tr>
+      </table></div>
+    </div>
+
+    <h2>Scenario avanzato: modificare il Blueprint</h2>
+
+    <p>Se l'oggetto <strong>deve</strong> rimanere protetto ma hai bisogno che determinati utenti (es. l'Help Desk) possano comunque gestirlo, non combattere SDPROP — usalo a tuo favore.</p>
+
+    <div class="insight-box fade-in">
+      <p><strong>Azione:</strong> Aggiungi i permessi necessari direttamente sull'oggetto <strong>AdminSDHolder</strong> situato in <code>CN=System,DC=dominio,DC=com</code>. Questo oggetto è il "blueprint": ogni permesso aggiunto qui viene propagato automaticamente da SDPROP a tutti i Protected Objects entro un'ora.</p>
+    </div>
+
+    <div class="conclusion-box fade-in">
+      <div class="quote">Non combattere AdminSDHolder.<br>Capisci come funziona e usalo come strumento.</div>
+    </div>
+
+    <div style="margin-top:3rem; display:flex; justify-content:space-between; align-items:center;">
+      <a id="back-link" href="../index.html" style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--ink-light); text-decoration:none;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-light)'">← Torna agli articoli</a>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--ink-xlight);">The Unchecked</span>
+    </div>
+
+  </article>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Torna su">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <footer>
+    <span>theunchecked</span>
+    <span>pubblicato su <a href="https://github.com/TheUnchecked/theunchecked">github</a></span>
+  </footer>
+
+  <script>
+    // Burger menu
+    const burger = document.getElementById("burger");
+    const navLinks = document.querySelector(".nav-links");
+    if (burger) {
+      burger.addEventListener("click", () => {
+        burger.classList.toggle("open");
+        navLinks.classList.toggle("mobile-open");
+        document.body.style.overflow = navLinks.classList.contains("mobile-open") ? "hidden" : "";
+      });
+      navLinks.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          burger.classList.remove("open");
+          navLinks.classList.remove("mobile-open");
+          document.body.style.overflow = "";
+        });
+      });
+    }
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+    // Progress bar
+    const progressBar = document.getElementById("progress-bar");
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (scrollTop / docHeight * 100) + "%";
+    });
+
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("visible", window.scrollY > 400);
+    });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    // Tempo di lettura
+    const content = document.querySelector(".article-content");
+    if (content) {
+      const words = content.innerText.split(/s+/).length;
+      const mins = Math.max(1, Math.round(words / 200));
+      const rt = document.getElementById("read-time");
+      if (rt) rt.textContent = mins + " min";
+    }
+
+    // Fade-out su torna agli articoli
+    const backLink = document.getElementById("back-link");
+    if (backLink) {
+      backLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.body.classList.add("fade-out");
+        setTimeout(() => { window.location.href = backLink.href; }, 260);
+      });
+    }
+  </script>
+
+</body>
+</html>
