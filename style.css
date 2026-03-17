@@ -1004,3 +1004,108 @@ body {
   .article-content p { font-size: 1rem; }
   .article-content h2 { font-size: 1.5rem; margin-top: 3rem; }
 }
+
+/* ============================================
+   NAVIGAZIONE PREV / NEXT TRA ARTICOLI
+   ============================================ */
+.article-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--ink-xlight);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--ink-xlight);
+  margin-top: 4rem;
+}
+
+.article-nav-link {
+  background: var(--bg);
+  padding: 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background var(--transition);
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-nav-link:hover { background: var(--bg-sec); }
+
+.article-nav-link.nav-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.article-nav-link.nav-placeholder {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.nav-direction {
+  font-family: var(--font-head);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.nav-num {
+  font-family: var(--font-disp);
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--ink-xlight);
+}
+
+.nav-title {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  color: var(--ink);
+  max-width: 280px;
+}
+
+.nav-next .nav-title { text-align: right; }
+
+.nav-tag {
+  font-family: var(--font-head);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+
+.nav-tag::before { content: '— '; }
+
+.nav-back-home {
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: var(--font-head);
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--ink-xlight);
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.nav-back-home:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .article-nav { grid-template-columns: 1fr; }
+  .article-nav-link.nav-next {
+    text-align: left;
+    align-items: flex-start;
+    border-top: 1px solid var(--ink-xlight);
+  }
+  .nav-next .nav-title { text-align: left; }
+}
