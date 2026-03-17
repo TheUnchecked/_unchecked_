@@ -14,19 +14,17 @@ ARTICLES = [
     {"file": "IA-Lavoro.html", "num": "01", "title": "L'IA ci ruberà il lavoro? Solo se lo meriti.", "tags": ["AI", "Lavoro"]},
 ]
 
+# L'ultimo articolo è quello con il numero più alto
+LATEST = max(ARTICLES, key=lambda a: int(a["num"]))
+
 HTML_NAV = """
 <nav class="article-nav" id="article-nav"></nav>
 <div style="text-align:center;">
   <a href="../index.html" class="nav-back-home" id="back-home-link">← Tutti gli articoli</a>
 </div>"""
 
-JS_ARTICLES = "const ARTICLES = " + str(ARTICLES).replace("'", '"').replace("True", "true").replace("False", "false") + ";"
-
 JS_NAV = """
-const ARTICLES = """ + str([
-    {"file": a["file"], "num": a["num"], "title": a["title"], "tags": a["tags"]}
-    for a in ARTICLES
-]).replace("'", '"') + """;
+const ARTICLES = """ + str(ARTICLES).replace("'", '"') + """;
 
 (function() {
   const currentFile = window.location.pathname.split('/').pop();
@@ -43,82 +41,4 @@ const ARTICLES = """ + str([
       </div>`;
     }
     const tags = article.tags.map(t => `<span class="nav-tag">${t}</span>`).join('');
-    const label = direction === 'prev' ? '← Precedente' : 'Successivo →';
-    return `<a class="article-nav-link nav-${direction}" href="${article.file}" data-href="${article.file}">
-      <span class="nav-direction">${label}</span>
-      <span class="nav-num">${article.num}</span>
-      <span class="nav-title">${article.title}</span>
-      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.2rem;">${tags}</div>
-    </a>`;
-  }
-
-  const nav = document.getElementById('article-nav');
-  if (nav) {
-    nav.innerHTML = buildLink(prev, 'prev') + buildLink(next, 'next');
-    nav.querySelectorAll('a[data-href]').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        document.body.classList.add('fade-out');
-        setTimeout(() => { window.location.href = link.getAttribute('data-href'); }, 260);
-      });
-    });
-  }
-
-  const backHome = document.getElementById('back-home-link');
-  if (backHome) {
-    backHome.addEventListener('click', e => {
-      e.preventDefault();
-      document.body.classList.add('fade-out');
-      setTimeout(() => { window.location.href = backHome.href; }, 260);
-    });
-  }
-})();"""
-
-OLD_BACKLINK = re.compile(
-    r'<div[^>]*style="margin-top:3rem.*?</div>\s*\n?\s*</article>',
-    re.DOTALL
-)
-
-OLD_JS = re.compile(
-    r'const backLink = document\.getElementById\("back-link"\);.*?}\s*\n?\s*}',
-    re.DOTALL
-)
-
-articles_dir = "articoli"
-
-for article in ARTICLES:
-    filepath = os.path.join(articles_dir, article["file"])
-    if not os.path.exists(filepath):
-        print(f"⚠️  Non trovato: {filepath}")
-        continue
-
-    with open(filepath, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # Salta se già aggiornato
-    if 'id="article-nav"' in content:
-        print(f"✅ Già aggiornato: {article['file']}")
-        continue
-
-    # Sostituisce il vecchio div back-link
-    content = re.sub(
-        r'<div style="margin-top:3rem.*?</div>\s*(?=\s*</article>)',
-        HTML_NAV + "\n\n  ",
-        content,
-        flags=re.DOTALL
-    )
-
-    # Sostituisce il vecchio JS backLink
-    content = re.sub(
-        r'const backLink = document\.getElementById\("back-link"\);.*?}\s*\n?\s*}',
-        JS_NAV,
-        content,
-        flags=re.DOTALL
-    )
-
-    with open(filepath, "w", encoding="utf-8") as f:
-        f.write(content)
-
-    print(f"✅ Aggiornato: {article['file']}")
-
-print("\\nDone!")
+    const l
