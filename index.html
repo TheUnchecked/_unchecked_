@@ -159,12 +159,37 @@
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 120);
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.card').forEach(c => observer.observe(c));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 120);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.card').forEach(c => observer.observe(c));
+
+// Filtro tag
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.card');
+const count = document.getElementById('article-count');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const tag = btn.dataset.tag;
+    let visible = 0;
+
+    cards.forEach(card => {
+      const tags = Array.from(card.querySelectorAll('.tag'))
+        .map(t => t.textContent.replace('— ', '').trim());
+      const show = tag === 'tutti' || tags.includes(tag);
+      card.style.display = show ? 'block' : 'none';
+      if (show) visible++;
+    });
+
+    count.textContent = visible;
+  });
+});
   </script>
 
 </body>
