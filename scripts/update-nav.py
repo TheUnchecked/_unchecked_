@@ -101,15 +101,22 @@ for article in ARTICLES:
     else:
         print(f"✅ Nav già presente: {article['file']}")
 
+content = re.sub(
+        r'<meta property="og:image" content="[^"]*">',
+        f'<meta property="og:image" content="{OG_IMAGE}">',
+        content
+    )
+    content = re.sub(
+        r'<meta name="twitter:image" content="[^"]*">',
+        f'<meta name="twitter:image" content="{OG_IMAGE}">',
+        content
+    )
     if 'og:image' not in content:
         content = content.replace(
             '<meta name="twitter:card"',
             f'<meta property="og:image" content="{OG_IMAGE}">\n  <meta name="twitter:image" content="{OG_IMAGE}">\n  <meta name="twitter:card"'
         )
-        print(f"✅ og:image aggiunto: {article['file']}")
-    else:
-        print(f"✅ og:image già presente: {article['file']}")
-
+    print(f"✅ og:image aggiornato: {article['file']}")
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
 
