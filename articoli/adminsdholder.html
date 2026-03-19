@@ -4,7 +4,7 @@
   <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}document.documentElement.dataset.theme=t||'dark'})()</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdminSDHolder — The Unchecked</title>
+  <title>AdminSDHolder   The Unchecked</title>
   <meta name="description" content="Riabiliti l'ereditarietà su un oggetto AD e un'ora dopo è di nuovo disabilitata. Non è un bug. È SDPROP.">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="The Unchecked">
@@ -43,7 +43,7 @@
     <span class="article-number">05</span>
     <h1 class="article-page-title">AdminSDHolder: perché i tuoi permessi<br>spariscono ogni <mark>60 minuti</mark>.</h1>
     <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:1.05rem; color:var(--ink-light); margin-top:1.2rem; line-height:1.7;">
-      Riabiliti l'ereditarietà su un oggetto AD e un'ora dopo è di nuovo disabilitata. Non è un bug. È SDPROP — e devi sapere come funziona per smettere di combatterlo alla cieca.
+      Riabiliti l'ereditarietà su un oggetto AD e un'ora dopo è di nuovo disabilitata. Non è un bug. È SDPROP   e devi sapere come funziona per smettere di combatterlo alla cieca.
     </p>
     <div class="tags" style="margin-top:1.5rem;">
       <span class="tag">Active Directory</span>
@@ -57,7 +57,7 @@
 
     <p>Hai appena passato mezz'ora a sistemare i permessi su un account in Active Directory. Riabiliti l'ereditarietà, salvi, tutto ok. Un'ora dopo il tuo collega ti chiama: i permessi sono spariti di nuovo.</p>
 
-    <p>Non sei impazzito. Non hai fatto niente di sbagliato. È <strong>AdminSDHolder</strong> — un meccanismo di protezione automatica di AD che sovrascrive silenziosamente quello che hai fatto.</p>
+    <p>Non sei impazzito. Non hai fatto niente di sbagliato. È <strong>AdminSDHolder</strong>   un meccanismo di protezione automatica di AD che sovrascrive silenziosamente quello che hai fatto.</p>
 
     <blockquote>Se non sai che esiste, combatterai per sempre contro qualcosa che non puoi vedere.</blockquote>
 
@@ -67,7 +67,7 @@
       <p><strong>Azione:</strong> Verifica se l'utente o il gruppo appartiene a gruppi amministrativi critici: <strong>Domain Admins</strong>, <strong>Enterprise Admins</strong>, <strong>Schema Admins</strong>, <strong>Account Operators</strong>, ecc.</p>
     </div>
 
-    <p>Il processo <strong>SDPROP</strong> (Security Descriptor Propagation) controlla ogni 60 minuti tutti i membri di questi gruppi privilegiati per garantire che i loro permessi siano sicuri e uniformi. Se l'oggetto è in questa lista, l'ereditarietà verrà disabilitata forzatamente ogni ora — anche se la riabiliti manualmente.</p>
+    <p>Il processo <strong>SDPROP</strong> (Security Descriptor Propagation) controlla ogni 60 minuti tutti i membri di questi gruppi privilegiati per garantire che i loro permessi siano sicuri e uniformi. Se l'oggetto è in questa lista, l'ereditarietà verrà disabilitata forzatamente ogni ora   anche se la riabiliti manualmente.</p>
 
     <div class="stats-row fade-in">
       <div class="stat-card">
@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    <p>Quando un oggetto viene protetto, AD imposta <code>adminCount = 1</code>. Anche dopo aver rimosso l'utente dai gruppi amministrativi, il valore rimane a 1. Resettarlo è necessario — ma da solo non riabilita l'ereditarietà.</p>
+    <p>Quando un oggetto viene protetto, AD imposta <code>adminCount = 1</code>. Anche dopo aver rimosso l'utente dai gruppi amministrativi, il valore rimane a 1. Resettarlo è necessario   ma da solo non riabilita l'ereditarietà.</p>
 
     <h2>Step 4: Riabilitare manualmente l'ereditarietà dei permessi</h2>
 
@@ -164,7 +164,7 @@
 
     <h2>Scenario avanzato: modificare il Blueprint</h2>
 
-    <p>Se l'oggetto <strong>deve</strong> rimanere protetto ma hai bisogno che determinati utenti (es. l'Help Desk) possano comunque gestirlo, non combattere SDPROP — usalo a tuo favore.</p>
+    <p>Se l'oggetto <strong>deve</strong> rimanere protetto ma hai bisogno che determinati utenti (es. l'Help Desk) possano comunque gestirlo, non combattere SDPROP   usalo a tuo favore.</p>
 
     <div class="insight-box fade-in">
       <p><strong>Azione:</strong> Aggiungi i permessi necessari direttamente sull'oggetto <strong>AdminSDHolder</strong> situato in <code>CN=System,DC=dominio,DC=com</code>. Questo oggetto è il "blueprint": ogni permesso aggiunto qui viene propagato automaticamente da SDPROP a tutti i Protected Objects entro un'ora.</p>
