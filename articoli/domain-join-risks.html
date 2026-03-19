@@ -4,7 +4,7 @@
   <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}document.documentElement.dataset.theme=t||'dark'})()</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La falla silenziosa: i rischi dell'account Domain Join in Active Directory — The Unchecked</title>
+  <title>La falla silenziosa: i rischi dell'account Domain Join in Active Directory   The Unchecked</title>
   <meta name="description" content="Ogni volta che aggiungi un dispositivo al dominio, stai concedendo permessi che nessuno ti ha mai spiegato. E gli attaccanti lo sanno.">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="The Unchecked">
@@ -182,7 +182,7 @@
 
     <span class="section-number">Non raccomandazioni. Prerequisiti.</span>
 
-    <h3>Mitigazione 1 — Azzeramento della ms-DS-MachineAccountQuota</h3>
+    <h3>Mitigazione 1   Azzeramento della ms-DS-MachineAccountQuota</h3>
 
     <p>Il primo passo è impedire che gli utenti standard possano aggiungere macchine al dominio. Di default il valore è 10: chiunque nel dominio può creare fino a dieci oggetti computer. Azzerarlo elimina questa superficie di attacco.</p>
 
@@ -195,9 +195,9 @@
       </table></div>
     </div>
 
-    <h3>Mitigazione 2 — Protezione degli attributi LAPS tramite ACE di tipo Deny</h3>
+    <h3>Mitigazione 2   Protezione degli attributi LAPS tramite ACE di tipo Deny</h3>
 
-    <p>Per bloccare la lettura di <code>ms-Mcs-AdmPwd</code> da parte dell'account di join, applica un rifiuto esplicito sull'OU di destinazione. Un Deny ACE ha precedenza su qualsiasi Allow ACE ereditato — anche sui permessi derivanti dalla proprietà dell'oggetto.</p>
+    <p>Per bloccare la lettura di <code>ms-Mcs-AdmPwd</code> da parte dell'account di join, applica un rifiuto esplicito sull'OU di destinazione. Un Deny ACE ha precedenza su qualsiasi Allow ACE ereditato   anche sui permessi derivanti dalla proprietà dell'oggetto.</p>
 
     <div class="code-block" data-lang="powershell">
       <div class="code-wrap"><table>
@@ -216,7 +216,7 @@
       </table></div>
     </div>
 
-    <h3>Mitigazione 3 — Blocco dell'abuso della delega (RBCD)</h3>
+    <h3>Mitigazione 3   Blocco dell'abuso della delega (RBCD)</h3>
 
     <p>Per prevenire la manipolazione di <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code>, applica un Deny sulla scrittura di quell'attributo. Stesso meccanismo del fix precedente, GUID diverso.</p>
 
