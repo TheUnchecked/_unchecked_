@@ -249,8 +249,8 @@ nav {
 }
 
 .hero-title mark {
-  background: var(--ink);
-  color: var(--bg);
+  background: #D3E601;
+  color: #151513;
   padding: 0 0.2rem;
 }
 
@@ -343,7 +343,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid #D3E601;
   padding-bottom: 0.6rem;
   margin-bottom: 2.5rem;
 }
@@ -504,8 +504,14 @@ nav {
 }
 
 .article-page-title .accent {
-  background: var(--ink);
-  color: var(--bg);
+  background: #D3E601;
+  color: #151513;
+  padding: 0 0.2rem;
+}
+
+.article-page-title mark {
+  background: #D3E601;
+  color: #151513;
   padding: 0 0.2rem;
 }
 
@@ -978,13 +984,13 @@ body {
   top: 0;
   left: 0;
   height: 2px;
-  background: var(--ink);
+  background: #D3E601;
   width: 0%;
   z-index: 999;
   transition: width 0.1s linear;
 }
 
-[data-theme="dark"] .progress-bar { background: #f0ede8; }
+[data-theme="dark"] .progress-bar { background: #D3E601; }
 
 /* ============================================
    RESPONSIVE
