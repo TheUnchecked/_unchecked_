@@ -136,12 +136,12 @@ def build_index(articles):
   <meta property="og:site_name" content="The Unchecked">
   <meta property="og:title" content="The Unchecked">
   <meta property="og:description" content="Non dare niente per scontato. Mai. IT, sicurezza, AI, lavoro.">
-  <meta property="og:image" content="{BASE_URL}/assets/favicon.png">
+  <meta property="og:image" content="{BASE_URL}/assets/og-default.png">
   <meta property="og:url" content="{BASE_URL}/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Unchecked">
   <meta name="twitter:description" content="Non dare niente per scontato. Mai.">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="icon" type="image/png" href="assets/og-default.png">
   <link rel="alternate" type="application/rss+xml" title="The Unchecked" href="{BASE_URL}/feed.xml">
   <link rel="stylesheet" href="style.css">
 </head>
