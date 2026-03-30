@@ -10,7 +10,7 @@
   <meta property="og:site_name" content="The Unchecked">
   <meta property="og:title" content="M365 Copilot è ciuoto. E meno male.">
   <meta property="og:description" content="Ogni tanto dico che M365 Copilot è ciuoto. E meno male. Ecco perché quella stupidità è in realtà la scelta più intelligente che Microsoft potesse fare.">
-  <meta property="og:url" content="https://theunchecked.github.io/_unchecked_/articoli/copilot-ciuoto.html">
+  <meta property="og:url" content="https://theunchecked.github.io/_unchecked_/articoli/Copilot-il-ciuoto.html">
   <meta property="og:image" content="https://theunchecked.github.io/_unchecked_/assets/images/copilot.jpeg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://theunchecked.github.io/_unchecked_/assets/images/copilot.jpeg">
@@ -21,12 +21,12 @@
   <div class="progress-bar" id="progress-bar"></div>
 
   <nav>
-    <a href="../index.html" class="logo"><span style="color:#c0392b">[</span> Unchecked <span style="color:#c0392b">]</span></a>
+    <a href="../index.html" class="logo"><span style="color:#C3D809">[</span> Unchecked <span style="color:#C3D809">]</span></a>
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../index.html#articoli">Articoli</a></li>
-        <li><a href="https://github.com/TheUnchecked/theunchecked" target="_blank">GitHub</a></li>
+        <li><a href="https://github.com/theunchecked/_unchecked_" target="_blank">GitHub</a></li>
       </ul>
       <button class="burger" id="burger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -52,6 +52,8 @@
       <span class="tag">Cloud</span>
     </div>
   </header>
+
+  <img class="article-cover" src="../assets/images/copilot.jpeg" alt="M365 Copilot" onerror="this.style.display='none'">
 
   <article class="article-content">
 
@@ -80,24 +82,20 @@
       <div class="pipeline-step">
         <div class="step-num">02</div>
         <div class="step-name">Microsoft Graph</div>
-        <div class="step-detail">L'API che connette M365 Copilot a tutti i dati di Microsoft 365: email su Exchange, file su OneDrive e SharePoint, chat di Teams, eventi calendario, contatti, liste di Planner. È anche un filtro di sicurezza: M365 Copilot accede solo ai dati a cui l'utente ha già accesso. Se un file è riservato, M365 Copilot non lo considererà. Mai.</div>
+        <div class="step-detail">L'API che connette M365 Copilot a tutti i dati di Microsoft 365. È anche un filtro di sicurezza: M365 Copilot accede solo ai dati a cui l'utente ha già accesso. Se un file è riservato, M365 Copilot non lo considererà. Mai.</div>
       </div>
       <div class="pipeline-step">
         <div class="step-num">03</div>
         <div class="step-name">Il motore di orchestrazione</div>
-        <div class="step-detail">Il componente meno visibile ma più importante. Interpreta la richiesta, decide quali dati servono, interroga Graph, costruisce il prompt arricchito e lo invia al modello. Tiene il contesto, aggiunge i riferimenti alle fonti, gestisce le iterazioni. Senza questo strato, M365 Copilot sarebbe solo un LLM come gli altri.</div>
+        <div class="step-detail">Interpreta la richiesta, decide quali dati servono, interroga Graph, costruisce il prompt arricchito e lo invia al modello. Senza questo strato, M365 Copilot sarebbe solo un LLM come gli altri.</div>
       </div>
     </div>
 
     <h2>Il grounding: che cos'è e perché risponde così</h2>
 
-    <p>Quando fai una domanda a M365 Copilot, lui non attinge solo alla conoscenza interna del modello, prima di rispondere, interroga i tuoi dati aziendali attraverso Graph: cerca nelle email, nei file SharePoint, nelle chat di Teams, nei calendari. Seleziona le informazioni più rilevanti, le assembla in un contesto, e costruisce la risposta su quella base.</p>
+    <p>Quando fai una domanda a M365 Copilot, lui non attinge solo alla conoscenza interna del modello — prima di rispondere, interroga i tuoi dati aziendali attraverso Graph: cerca nelle email, nei file SharePoint, nelle chat di Teams, nei calendari.</p>
 
     <p>Questo meccanismo si chiama grounding, ed è il motivo per cui M365 Copilot a volte sembra meno brillante di ChatGPT su domande generiche. Non sta cercando di impressionarti con la sua conoscenza del mondo. Sta cercando di risponderti in base a quello che esiste davvero nella tua organizzazione.</p>
-
-    <p>Se chiedi "riassumi il progetto XYZ degli ultimi tre mesi", M365 Copilot cercherà le email rilevanti degli ultimi 90 giorni, i file SharePoint del team di progetto, le trascrizioni delle riunioni Teams, i report su OneDrive. Incrocerà quelle fonti e produrrà un documento con risultati, problemi incontrati e prossimi passi. Tutto basato su dati reali, con i riferimenti alle fonti originali.</p>
-
-    <p>Se ponessi la stessa domanda a ChatGPT, otterresti una risposta generica. ChatGPT non sa nulla dei tuoi file interni.</p>
 
     <blockquote>Se M365 Copilot non trova niente di rilevante nei tuoi dati, la risposta sarà più piatta. Non perché sia ciuoto. Perché non vuole inventare.</blockquote>
 
@@ -109,9 +107,7 @@
       <p>Microsoft lo garantisce contrattualmente per tutti gli utenti business: tutto quello che scrivi rimane confinato nel tuo tenant, non esce, non viene letto da ingegneri, non contribuisce ad aggiornare nessun modello.</p>
     </div>
 
-    <p>In gergo tecnico si chiama data isolation: ogni organizzazione ha il proprio spazio e l'AI non impara nulla sui tuoi documenti che possa poi trapelare ad altri clienti.</p>
-
-    <p>Tutto quello che M365 Copilot elabora rimane dentro i confini dell'infrastruttura Microsoft 365. Le comunicazioni sono cifrate end-to-end. I permessi impostati sui documenti vengono rispettati: se un file è classificato come confidenziale, M365 Copilot non lo userà per rispondere a chi non dovrebbe vederlo. Le policy di Data Loss Prevention, il Conditional Access, la Multi-Factor Authentication che hai configurato su Microsoft 365 valgono anche per M365 Copilot. Non ci sono eccezioni.</p>
+    <p>Le policy di Data Loss Prevention, il Conditional Access, la Multi-Factor Authentication che hai configurato su Microsoft 365 valgono anche per M365 Copilot. Non ci sono eccezioni.</p>
 
     <div class="stats-row fade-in">
       <div class="stat-card">
@@ -147,15 +143,11 @@
       </div>
     </div>
 
-    <p>Per banche, assicurazioni, aziende in settori regolamentati, usare ChatGPT sarebbe impensabile per i rischi di data leakage. M365 Copilot no, perché è costruito con principi di privacy by design che quei settori richiedono.</p>
-
     <h2>Il vero problema</h2>
 
     <p>Chi si lamenta che M365 Copilot è stupido sta facendo un confronto sbagliato. Sta prendendo uno strumento progettato per operare in sicurezza dentro un ecosistema aziendale e lo sta giudicando con i parametri di uno strumento progettato per fare tutto, per tutti, senza vincoli.</p>
 
     <p>M365 Copilot è ciuoto solo se gli chiedi di essere qualcosa che non è.</p>
-
-    <p>Se invece lo usi per quello per cui è stato costruito, ovvero lavorare con i tuoi dati reali all'interno del tuo perimetro aziendale, smette di sembrare stupido. E inizia a sembrare quello che è: uno strumento serio, costruito per chi ha dati da proteggere.</p>
 
     <h2>Detto questo, nessuno strumento è infallibile</h2>
 
@@ -181,8 +173,8 @@
   </button>
 
   <footer>
-    <span>theunchecked</span>
-    <span>pubblicato su <a href="https://github.com/TheUnchecked/theunchecked">github</a></span>
+    <span>the.unchecked</span>
+    <span>pubblicato su <a href="https://github.com/theunchecked/_unchecked_">github</a></span>
   </footer>
 
   <script>
@@ -212,24 +204,17 @@
     });
 
     const progressBar = document.getElementById("progress-bar");
+    const backToTop = document.getElementById("back-to-top");
     window.addEventListener("scroll", () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       progressBar.style.width = (scrollTop / docHeight * 100) + "%";
+      backToTop.classList.toggle("visible", scrollTop > 400);
     });
 
-    const backToTop = document.getElementById("back-to-top");
-    window.addEventListener("scroll", () => {
-      backToTop.classList.toggle("visible", window.scrollY > 400);
-    });
     backToTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     const content = document.querySelector(".article-content");
     if (content) {
@@ -247,6 +232,11 @@
         setTimeout(() => { window.location.href = backLink.href; }, 260);
       });
     }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 
 </body>
