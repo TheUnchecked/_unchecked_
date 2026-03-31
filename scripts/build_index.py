@@ -142,6 +142,7 @@ def build_index(articles):
   <link rel="icon" type="image/png" href="assets/og-default.png">
   <link rel="alternate" type="application/rss+xml" title="The Unchecked" href="{BASE_URL}/feed.xml">
   <link rel="stylesheet" href="style.css">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="04641f83-68da-43d1-af67-7ea3b798c434"></script>
 </head>
 <body>
 
@@ -151,6 +152,7 @@ def build_index(articles):
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="#articoli">Articoli</a></li>
+        <li><a href="https://github.com/theunchecked/1checked" target="_blank">GitHub</a></li>
       </ul>
       <button id="theme-toggle" aria-label="Toggle theme">
         <svg id="theme-icon-dark" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
