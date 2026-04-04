@@ -5,8 +5,15 @@
     <link>https://theunchecked.github.io/1checked/</link>
     <description>Non dare niente per scontato. Mai.</description>
     <language>it</language>
-    <lastBuildDate>Thu, 02 Apr 2026 09:34:28 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 04 Apr 2026 18:51:32 +0000</lastBuildDate>
     <atom:link href="https://theunchecked.github.io/1checked/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Dark pattern: l'architettura invisibile che guida le tue scelte .</title>
+      <link>https://theunchecked.github.io/1checked/articoli/dark-pattern.html</link>
+      <guid>https://theunchecked.github.io/1checked/articoli/dark-pattern.html</guid>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Ogni volta che clicchi "Accetta tutto" senza leggere, ogni volta che ti iscrivi in un clic ma non riesci a cancellarti, ogni volta che l'app ti interrompe finch...</description>
+    </item>
     <item>
       <title>BloodHound CE su Kali Linux: guida rapida al primo avvio .</title>
       <link>https://theunchecked.github.io/1checked/articoli/BloodHound.html</link>
