@@ -233,10 +233,31 @@
       });
     }
 
-    const observer = new IntersectionObserver((entries) => {
+    const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // Typewriter effect sui blockquote
+    const typeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const text = el.textContent;
+          el.textContent = "";
+          let i = 0;
+          const type = () => {
+            if (i < text.length) {
+              el.textContent += text[i++];
+              setTimeout(type, 18);
+            }
+          };
+          type();
+          typeObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll("blockquote").forEach(q => typeObserver.observe(q));
   </script>
 
 </body>
