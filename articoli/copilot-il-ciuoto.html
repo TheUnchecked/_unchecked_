@@ -42,9 +42,7 @@
     <p class="article-meta">2026-03-18 | The Unchecked<span class="read-time" id="read-time"></span></p>
     <span class="article-number">10</span>
     <h1 class="article-page-title">M365 Copilot è <mark>"ciuoto"</mark>.<br>E meno male.</h1>
-    <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:1.05rem; color:var(--ink-light); margin-top:1.2rem; line-height:1.7;">
-      Ogni tanto lo dico. Nel dialetto anglolucano, ciuoto significa stupido. Ed è esattamente quello che si sente dire di M365 Copilot da chi lo usa aspettandosi ChatGPT. Ma quella stupidità è una scelta. E per la sicurezza aziendale, è la scelta giusta.
-    </p>
+    <p id="hero-subtitle" style="font-family:'Instrument Serif',serif; font-style:italic; font-size:1.05rem; color:#C3D809; margin-top:1.2rem; line-height:1.7; min-height:5rem;"></p>
     <div class="tags" style="margin-top:1.5rem;">
       <span class="tag">Microsoft 365</span>
       <span class="tag">Copilot</span>
@@ -238,6 +236,19 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
+    // Typewriter effect sul sottotitolo in verde
+    const subtitleText = "Ogni tanto lo dico. Nel dialetto anglolucano, ciuoto significa stupido. Ed è esattamente quello che si sente dire di M365 Copilot da chi lo usa aspettandosi ChatGPT. Ma quella stupidità è una scelta. E per la sicurezza aziendale, è la scelta giusta.";
+    const subtitleEl = document.getElementById("hero-subtitle");
+    let i = 0;
+    const typeSubtitle = () => {
+      if (i < subtitleText.length) {
+        subtitleEl.textContent += subtitleText[i++];
+        setTimeout(typeSubtitle, 18);
+      }
+    };
+    // Parte subito al caricamento della pagina
+    window.addEventListener("load", () => setTimeout(typeSubtitle, 400));
+
     // Typewriter effect sui blockquote
     const typeObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -245,10 +256,10 @@
           const el = entry.target;
           const text = el.textContent;
           el.textContent = "";
-          let i = 0;
+          let j = 0;
           const type = () => {
-            if (i < text.length) {
-              el.textContent += text[i++];
+            if (j < text.length) {
+              el.textContent += text[j++];
               setTimeout(type, 18);
             }
           };
