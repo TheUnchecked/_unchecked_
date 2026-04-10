@@ -5,8 +5,15 @@
     <link>https://theunchecked.github.io/1checked/</link>
     <description>Non dare niente per scontato. Mai.</description>
     <language>it</language>
-    <lastBuildDate>Sun, 05 Apr 2026 06:30:53 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Apr 2026 18:13:52 +0000</lastBuildDate>
     <atom:link href="https://theunchecked.github.io/1checked/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Meta condannata a 375 milioni . E adesso?</title>
+      <link>https://theunchecked.github.io/1checked/articoli/meta-multa.html</link>
+      <guid>https://theunchecked.github.io/1checked/articoli/meta-multa.html</guid>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Meta condannata a 375 milioni di dollari per sfruttamento minorile.</description>
+    </item>
     <item>
       <title>Dark pattern: l'architettura invisibile che guida le tue scelte .</title>
       <link>https://theunchecked.github.io/1checked/articoli/dark-pattern.html</link>
