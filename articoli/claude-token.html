@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}document.documentElement.dataset.theme=t||'dark'})()</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Come non esaurire i token di Claude in poche ore — The Unchecked</title>
+  <meta name="description" content="Claude rilegge l'intera conversazione ad ogni messaggio. Ecco le abitudini che cambiano il modo in cui spendi i token.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Unchecked">
+  <meta property="og:title" content="Come non esaurire i token di Claude in poche ore.">
+  <meta property="og:description" content="Claude rilegge l'intera conversazione ad ogni messaggio. Ecco le abitudini che cambiano il modo in cui spendi i token.">
+  <meta property="og:url" content="https://theunchecked.github.io/1checked/articoli/claude-token.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../style.css">
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="04641f83-68da-43d1-af67-7ea3b798c434"></script>
+</head>
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav>
+    <a href="../index.html" class="logo"><span style="color:#C3D809">[</span> Unchecked <span style="color:#C3D809">]</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#articoli">Articoli</a></li>
+      </ul>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <button id="theme-toggle" aria-label="Toggle theme">
+        <svg id="theme-icon-dark" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="theme-icon-light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <p class="article-meta">2026-04-12 | The Unchecked<span class="read-time" id="read-time"></span></p>
+    <span class="article-number">16</span>
+    <h1 class="article-page-title">Come non esaurire i token<br>di Claude in <mark>poche ore</mark>.</h1>
+    <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:1.05rem; color:var(--ink-light); margin-top:1.2rem; line-height:1.7;">
+      Claude rilegge l'intera conversazione ad ogni messaggio. Ecco le abitudini che cambiano il modo in cui spendi i token.
+    </p>
+    <div class="tags" style="margin-top:1.5rem;">
+      <span class="tag">Claude</span>
+      <span class="tag">AI</span>
+      <span class="tag">Produttività</span>
+      <span class="tag">Token</span>
+    </div>
+  </header>
+
+  <article class="article-content">
+
+    <p>Claude conta i token. Un token è più o meno una parola.</p>
+
+    <p>Ogni volta che mandi un messaggio, Claude rilegge l'intera conversazione dall'inizio. Ogni messaggio precedente. Ogni risposta precedente. Tutto.</p>
+
+    <p>Il messaggio 1 costa pochissimo. Il messaggio 30? Claude sta rileggendo 29 scambi prima ancora di iniziare a pensare alla tua domanda.</p>
+
+    <blockquote>Ecco perché i crediti spariscono. La conversazione cresce e ogni messaggio diventa più costoso.</blockquote>
+
+    <p>Quello che segue sono le abitudini che hanno cambiato il mio modo di usare Claude. Non tutte. Quelle che contano davvero.</p>
+
+    <h2>1. Converti i file prima di caricarli</h2>
+
+    <p>Una singola pagina PDF costa tra 1.500 e 3.000 token. Uno screenshot 1000x1000 ne vale circa 1.300. I file DOCX e PPTX portano con sé metadati invisibili che consumano token senza darti niente in cambio.</p>
+
+    <div class="stats-row fade-in">
+      <div class="stat-card">
+        <div class="stat-number">3.000</div>
+        <div class="stat-label">token per pagina PDF</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1.300</div>
+        <div class="stat-label">token per screenshot 1000x1000</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100</div>
+        <div class="stat-label">token con ritaglio preciso</div>
+      </div>
+    </div>
+
+    <p>Prima di caricare: estrai il testo. Copia e incolla solo le sezioni che servono in un file di testo o markdown. Se ritagli uno screenshot alla sola parte che ti interessa, puoi scendere da 1.300 token a meno di 100.</p>
+
+    <p>Se carichi lo stesso PDF di 15 pagine in 4 chat diverse, hai bruciato 180.000 token su un documento che convertito in testo pulito ne avrebbe costati 2.000.</p>
+
+    <div class="insight-box fade-in">
+      <p>Il flusso che uso: apro un documento su <code>doc.new</code>, incollo il testo, lo scarico come file <code>.md</code> e lo carico su Claude.</p>
+    </div>
+
+    <h2>2. Pianifica in chat. Costruisci alla fine.</h2>
+
+    <p>La creazione di file, fogli di calcolo, documenti e presentazioni, consuma più token dei normali messaggi di chat.</p>
+
+    <p>Non aprire uno strumento di creazione e dire "costruiscimi un modello finanziario."</p>
+
+    <p>Prima pianifica la struttura in chat. Definisci le sezioni, chiarisci le ipotesi. Quando sai esattamente cosa vuoi, solo allora passa alla creazione.</p>
+
+    <div class="two-cols fade-in">
+      <div class="col-side col-left">
+        <div class="col-side-title">Fase di pianificazione</div>
+        <p>In chat. Costa poco.</p>
+        <p>Struttura, sezioni, ipotesi.</p>
+        <p>Fino a quando non sai esattamente cosa vuoi.</p>
+      </div>
+      <div class="col-side col-right">
+        <div class="col-side-title">Fase di costruzione</div>
+        <p>Nello strumento di creazione. Costa di più.</p>
+        <p>Solo quando hai le idee chiare.</p>
+        <p>Una volta sola, senza correzioni continue.</p>
+      </div>
+    </div>
+
+    <h2>3. Scrivi "fammi delle domande" invece di un prompt lungo</h2>
+
+    <p>Un prompt di 500 parole costa 500 token ogni volta che Claude rilegge la conversazione. Se invece scrivi 15 parole e chiedi a Claude di farti domande chiarificatrici, le domande vengono generate una volta e le tue risposte sono brevi.</p>
+
+    <p>Cliccare su un'opzione costa quasi niente. Scrivere paragrafi di istruzioni costa molto. Lascia che sia Claude a estrarre il contesto invece di spingerlo contro muri di testo.</p>
+
+    <h2>4. Non chiedere di rifare tutto</h2>
+
+    <p>Quando la sezione 3 di un documento è sbagliata, non dire "rifai il documento."</p>
+
+    <p>Di' "rifai solo la sezione 3. Conserva tutto il resto."</p>
+
+    <p>Ogni rifacimento completo significa rigenerare l'intero output. Se il report è di 2.000 token, sono 2.000 token di output bruciati di nuovo. Indica la sezione specifica. Di' a Claude cosa non va.</p>
+
+    <div class="warning-box fade-in">
+      <p>Aggiungi "nessun commento, nessuna spiegazione, solo l'output" quando sai già cosa vuoi. Ogni frase di "Certo, ecco cosa ho fatto..." sono token che stai pagando.</p>
+    </div>
+
+    <h2>5. Raggruppa i compiti in un unico messaggio</h2>
+
+    <p>Tre prompt separati significano tre riletture complete del contesto. Un prompt con tre compiti significa una sola rilettura.</p>
+
+    <p>Invece di mandare "riassumi questo articolo", poi "elenca i punti principali", poi "suggerisci un titolo" in tre messaggi separati, scrivi tutto in uno. Il risultato è spesso migliore.</p>
+
+    <h2>6. Modifica il messaggio invece di mandare un follow-up</h2>
+
+    <p>Ogni volta che scrivi "no, intendevo..." o "cambia X in Y", stai aggiungendo alla cronologia. Claude rilegge tutto, compreso l'errore che hai già corretto.</p>
+
+    <p>In chat puoi modificare il messaggio originale e rigenerare la risposta. La vecchia versione viene sostituita, non accumulata. Usalo sempre quando Claude ha mancato il punto.</p>
+
+    <h2>7. Apri una nuova chat quando l'argomento cambia</h2>
+
+    <p>Se hai parlato di un post LinkedIn, poi di una proposta cliente, poi di altro nella stessa chat, Claude rilegge tutto ogni volta. I messaggi vecchi su argomenti diversi sono peso morto.</p>
+
+    <div class="insight-box fade-in">
+      <p>Nuovo argomento, nuova chat. Sempre.</p>
+    </div>
+
+    <h2>8. Ogni 15-20 messaggi, riassumi e ricomincia</h2>
+
+    <p>Le conversazioni lunghe sono forni per token. Un sviluppatore ha misurato che il 98,5% dei token in una sessione lunga viene speso rileggendo la cronologia. Solo l'1,5% va alla produzione effettiva.</p>
+
+    <p>Quando una sessione diventa lunga: chiedi a Claude di riassumere tutto quello che conta, copia il riepilogo, apri una nuova sessione e incollalo come primo messaggio.</p>
+
+    <h2>9. Usa il modello giusto per il compito</h2>
+
+    <p>Controlli grammaticali, brainstorming, riformattazione, risposte brevi: non serve il modello più potente. Sonnet gestisce queste cose a una frazione del costo.</p>
+
+    <p>Opus con pensiero esteso serve per lavoro profondo. Non usare macchinari pesanti per spostare una sedia. Se Claude impiega meno di 30 secondi a rispondere, probabilmente non hai bisogno del modello più costoso.</p>
+
+    <h2>10. Disattiva quello che non usi</h2>
+
+    <p>Ricerca web, connettori, modalità esplorazione: tutti aggiungono token a ogni risposta, anche quando non servono.</p>
+
+    <p>La mia impostazione di default: tutto spento. Attivo le funzionalità per compito, non per abitudine.</p>
+
+    <h2>11. Usa i Progetti per file che riusi spesso</h2>
+
+    <p>Se carichi lo stesso documento in cinque chat diverse, Claude lo ri-tokenizza ogni volta. Cinque letture complete.</p>
+
+    <p>I Progetti memorizzano il file una volta. Ogni nuova conversazione vi fa riferimento senza bruciare di nuovo i token. Se lavori con contratti, guide di stile o documenti di ricerca a cui torni spesso, questo da solo riduce significativamente il consumo.</p>
+
+    <h2>12. Smetti di usare Claude per cose che non sa fare bene</h2>
+
+    <p>Claude non genera immagini. Se passi 5 messaggi cercando soluzioni alternative basate su testo per qualcosa che richiede un'immagine, hai bruciato 5 messaggi su un compito che Claude non avrebbe mai risolto.</p>
+
+    <p>Per la ricerca in tempo reale ci sono strumenti più veloci e precisi. Conoscere i limiti dello strumento è parte dell'usarlo bene.</p>
+
+    <div class="conclusion-box fade-in">
+      <div class="quote">Non si tratta di usare meno Claude.<br>Si tratta di non sprecare quello che hai.</div>
+    </div>
+
+    <div style="margin-top:3rem; display:flex; justify-content:space-between; align-items:center;">
+      <a id="back-link" href="../index.html" style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--ink-light); text-decoration:none;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-light)'">← Torna agli articoli</a>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.6rem; letter-spacing:2px; text-transform:uppercase; color:var(--ink-xlight);">The Unchecked</span>
+    </div>
+
+  </article>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Torna su">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <footer>
+    <span>the.unchecked</span>
+    <span>pubblicato su <a href="https://github.com/theunchecked/1checked">github</a></span>
+  </footer>
+
+  <script>
+    const burger = document.getElementById("burger");
+    const navLinks = document.querySelector(".nav-links");
+    if (burger) {
+      burger.addEventListener("click", () => {
+        burger.classList.toggle("open");
+        navLinks.classList.toggle("mobile-open");
+        document.body.style.overflow = navLinks.classList.contains("mobile-open") ? "hidden" : "";
+      });
+      navLinks.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          burger.classList.remove("open");
+          navLinks.classList.remove("mobile-open");
+          document.body.style.overflow = "";
+        });
+      });
+    }
+
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    const progressBar = document.getElementById("progress-bar");
+    const backToTop = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (scrollTop / docHeight * 100) + "%";
+      backToTop.classList.toggle("visible", scrollTop > 400);
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const content = document.querySelector(".article-content");
+    if (content) {
+      const words = content.innerText.split(/\s+/).length;
+      const mins = Math.max(1, Math.round(words / 200));
+      const rt = document.getElementById("read-time");
+      if (rt) rt.textContent = " · " + mins + " min";
+    }
+
+    const backLink = document.getElementById("back-link");
+    if (backLink) {
+      backLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        document.body.classList.add("fade-out");
+        setTimeout(() => { window.location.href = backLink.href; }, 260);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
