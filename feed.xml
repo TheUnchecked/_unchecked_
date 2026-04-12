@@ -5,8 +5,15 @@
     <link>https://theunchecked.github.io/1checked/</link>
     <description>Non dare niente per scontato. Mai.</description>
     <language>it</language>
-    <lastBuildDate>Sat, 11 Apr 2026 12:57:04 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 06:29:17 +0000</lastBuildDate>
     <atom:link href="https://theunchecked.github.io/1checked/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Come non esaurire i token di Claude in poche ore .</title>
+      <link>https://theunchecked.github.io/1checked/articoli/claude-token.html</link>
+      <guid>https://theunchecked.github.io/1checked/articoli/claude-token.html</guid>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Claude conta i token. Un token è più o meno una parola.</description>
+    </item>
     <item>
       <title>Meta condannata a 375 milioni . E adesso?</title>
       <link>https://theunchecked.github.io/1checked/articoli/meta-multa.html</link>
