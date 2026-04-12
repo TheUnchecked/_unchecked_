@@ -5,12 +5,19 @@
     <link>https://theunchecked.github.io/1checked/</link>
     <description>Non dare niente per scontato. Mai.</description>
     <language>it</language>
-    <lastBuildDate>Sun, 12 Apr 2026 06:29:17 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 06:38:56 +0000</lastBuildDate>
     <atom:link href="https://theunchecked.github.io/1checked/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Come non esaurire i token di Claude in poche ore .</title>
       <link>https://theunchecked.github.io/1checked/articoli/claude-token.html</link>
       <guid>https://theunchecked.github.io/1checked/articoli/claude-token.html</guid>
+      <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
+      <description>Claude conta i token. Un token è più o meno una parola.</description>
+    </item>
+    <item>
+      <title>Come non esaurire i token di Claude in poche ore .</title>
+      <link>https://theunchecked.github.io/1checked/articoli/copilot-il-ciuoto.html</link>
+      <guid>https://theunchecked.github.io/1checked/articoli/copilot-il-ciuoto.html</guid>
       <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
       <description>Claude conta i token. Un token è più o meno una parola.</description>
     </item>
@@ -41,13 +48,6 @@
       <guid>https://theunchecked.github.io/1checked/articoli/kerberoasting.html</guid>
       <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
       <description>Ti sei mai chiesto quanti account di servizio nel tuo dominio hanno una password che non cambia da anni?</description>
-    </item>
-    <item>
-      <title>M365 Copilot è "ciuoto" . E meno male.</title>
-      <link>https://theunchecked.github.io/1checked/articoli/copilot-il-ciuoto.html</link>
-      <guid>https://theunchecked.github.io/1checked/articoli/copilot-il-ciuoto.html</guid>
-      <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-      <description>Ogni tanto dico che M365 Copilot è "ciuoto". E meno male!</description>
     </item>
     <item>
       <title>Organizzarsi non è ovvio. E i numeri lo dimostrano.</title>
